@@ -33,12 +33,24 @@
             50% { opacity: 1; }
             100% { opacity: 0; }
         }
-        #contact {
-            font-size: 1.5rem;
-            margin-top: 20px;
+        #contact-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
+        }
+        #contact {
+            font-size: 1.5rem;
             text-decoration: underline;
+        }
+        #hand-emoji {
+            font-size: 1.5rem;
+            animation: pointHand 0.5s ease-in-out infinite alternate;
+        }
+        @keyframes pointHand {
+            from { transform: translateX(0); }
+            to { transform: translateX(5px); }
         }
         @keyframes lightPass {
             0% { color: #0f0; text-decoration-color: #0f0; }
@@ -49,9 +61,13 @@
 </head>
 <body>
     <div id="terminal"></div>
-    <div id="contact">hello@oyarsa.health</div>
+    <div id="contact-wrapper">
+        <div id="hand-emoji">👉</div>
+        <div id="contact">hello@oyarsa.health</div>
+    </div>
     <script>
         const terminal = document.getElementById('terminal');
+        const contactWrapper = document.getElementById('contact-wrapper');
         const contact = document.getElementById('contact');
         const text = `AI-enriched quality cancer care for everyone, everywhere.`;
 
@@ -70,7 +86,7 @@
         typeWriter(terminal, text, () => {
             terminal.innerHTML += '<span class="cursor">█</span>';
             setTimeout(() => {
-                contact.style.opacity = '1';
+                contactWrapper.style.opacity = '1';
                 setTimeout(() => {
                     contact.style.animation = 'lightPass 1.5s forwards';
                 }, 500);
