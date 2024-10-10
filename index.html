@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oyarsa Health</title>
+    
+    <meta name="description" content="AI-enriched quality cancer care for everyone, everywhere.">
+    <meta property="og:title" content="Oyarsa Health">
+    <meta property="og:description" content="AI-enriched quality cancer care for everyone, everywhere.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://oyarsa.health">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Oyarsa Health">
+    <meta name="twitter:description" content="AI-enriched quality cancer care for everyone, everywhere.">
+
     <style>
         body {
             background-color: #000;
@@ -19,61 +29,72 @@
             transition: background-color 2s, color 0.5s;
         }
         #oyarsa {
-            font-size: 2.5rem; /* Reduced from 3rem */
+            font-size: 2.5rem;
             font-weight: bold;
             margin-bottom: 2em;
         }
         #terminal {
             text-align: center;
             white-space: pre-wrap;
-            font-size: 1.5rem; /* Reduced from 1.8rem */
+            font-size: 1.5rem;
             max-width: 80%;
             line-height: 1.4;
-            margin-bottom: 3em; /* Increased from 2.5em to 3em */
+            margin-bottom: 3em;
         }
         .cursor {
             animation: blink 0.7s infinite;
         }
         @keyframes blink {
             0% { opacity: 0; }
-             50% { opacity: 1; }
+            50% { opacity: 1; }
             100% { opacity: 0; }
         }
         #contact-wrapper {
             display: flex;
             align-items: center;
             gap: 10px;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            opacity: 1;
         }
         #contact {
-            font-size: 1rem; /* Reduced from 1.2rem */
+            font-size: 1rem;
             text-decoration: underline;
             color: inherit;
-            transition: color 0.5s;
         }
         #hand-emoji {
-            font-size: 1rem; /* Reduced from 1.2rem */
+            font-size: 1rem;
         }
     </style>
+    <noscript>
+        <style>
+            body {
+                background-color: #fff !important;
+                color: #222 !important;
+            }
+        </style>
+    </noscript>
 </head>
 <body>
     <div id="oyarsa">Oyarsa</div>
-    <div id="terminal"></div>
+    <div id="terminal">AI-enriched quality cancer care
+for everyone, everywhere.</div>
     <div id="contact-wrapper">
         <div id="hand-emoji">👉</div>
         <div id="contact">hello@oyarsa.health</div>
     </div>
+
     <script>
         const body = document.body;
         const terminal = document.getElementById('terminal');
         const contactWrapper = document.getElementById('contact-wrapper');
-        const text = `AI-enriched quality cancer care\nfor everyone, everywhere.`;
+        const text = terminal.textContent;
+
+        terminal.textContent = '';
+        contactWrapper.style.opacity = '0';
 
         let i = 0;
         function typeWriter(element, content, callback) {
             if (i < content.length) {
-                element.textContent = content.substring(0, i + 1);
+                element.textContent += content[i];
                 i++;
                 setTimeout(() => typeWriter(element, content, callback), Math.random() * 50 + 10);
             } else {
