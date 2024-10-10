@@ -17,13 +17,18 @@
             justify-content: center;
             align-items: center;
         }
+        #oyarsa {
+            font-size: 2.5rem; /* Reduced from 3rem */
+            font-weight: bold;
+            margin-bottom: 2em;
+        }
         #terminal {
             text-align: center;
             white-space: pre-wrap;
-            margin-bottom: 20vh;
-            font-size: 2.5rem;
+            font-size: 1.5rem; /* Reduced from 1.8rem */
             max-width: 80%;
             line-height: 1.4;
+            margin-bottom: 2.5em; /* Increased from 2em to 2.5em */
         }
         .cursor {
             animation: blink 0.7s infinite;
@@ -41,25 +46,17 @@
             transition: opacity 0.5s ease-in-out;
         }
         #contact {
-            font-size: 1.5rem;
+            font-size: 1rem; /* Reduced from 1.2rem */
             text-decoration: underline;
+            color: #0f0;
         }
         #hand-emoji {
-            font-size: 1.5rem;
-            animation: pointHand 0.5s ease-in-out infinite alternate;
-        }
-        @keyframes pointHand {
-            from { transform: translateX(0); }
-            to { transform: translateX(5px); }
-        }
-        @keyframes lightPass {
-            0% { color: #0f0; text-decoration-color: #0f0; }
-            50% { color: #fff; text-decoration-color: #fff; }
-            100% { color: #fff; text-decoration-color: #fff; }
+            font-size: 1rem; /* Reduced from 1.2rem */
         }
     </style>
 </head>
 <body>
+    <div id="oyarsa">Oyarsa</div>
     <div id="terminal"></div>
     <div id="contact-wrapper">
         <div id="hand-emoji">👉</div>
@@ -68,17 +65,15 @@
     <script>
         const terminal = document.getElementById('terminal');
         const contactWrapper = document.getElementById('contact-wrapper');
-        const contact = document.getElementById('contact');
-        const text = `AI-enriched quality cancer care for everyone, everywhere.`;
+        const text = `AI-enriched quality cancer care\nfor everyone, everywhere.`;
 
         let i = 0;
         function typeWriter(element, content, callback) {
             if (i < content.length) {
-                element.innerHTML += content.charAt(i);
+                element.textContent = content.substring(0, i + 1);
                 i++;
                 setTimeout(() => typeWriter(element, content, callback), Math.random() * 50 + 10);
             } else {
-                i = 0;
                 if (callback) callback();
             }
         }
@@ -87,9 +82,6 @@
             terminal.innerHTML += '<span class="cursor">█</span>';
             setTimeout(() => {
                 contactWrapper.style.opacity = '1';
-                setTimeout(() => {
-                    contact.style.animation = 'lightPass 1.5s forwards';
-                }, 500);
             }, 500);
         });
     </script>
