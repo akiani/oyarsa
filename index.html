@@ -3,32 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oyarsa Health - Coming Soon</title>
+    <title>Oyarsa Health</title>
     <style>
         body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: #f1f1f1;
-            color: #606060;
-            text-align: center;
-            padding-top: 20%;
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
             margin: 0;
-            font-size: 24px;
+            padding: 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
-        h1 {
-            font-size: 48px;
-            color: #181818; /* Soft red */
+        #terminal {
+            text-align: center;
+            white-space: pre-wrap;
+            margin-bottom: 20vh;
         }
-        a {
-            color: #009dff; /* Soft blue */
-            text-decoration: none;
+        .cursor {
+            animation: blink 0.7s infinite;
         }
-        a:hover {
-            text-decoration: underline;
+        @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        #contact {
+            font-size: 0.9em;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Something great is in the works 😊</h1>
-    <p>hello@oyarsa.health</p>
+    <div id="terminal"></div>
+    <div id="contact"></div>
+    <script>
+        const terminal = document.getElementById('terminal');
+        const contact = document.getElementById('contact');
+        const text = `AI-enriched quality cancer care for everyone, everywhere.`;
+        const email = `hello@oyarsa.health`;
+
+        let i = 0;
+        function typeWriter(element, content, callback) {
+            if (i < content.length) {
+                element.innerHTML += content.charAt(i);
+                i++;
+                setTimeout(() => typeWriter(element, content, callback), Math.random() * 50 + 10);
+            } else {
+                i = 0;
+                if (callback) callback();
+            }
+        }
+
+        typeWriter(terminal, text, () => {
+            terminal.innerHTML += '<span class="cursor">█</span>';
+            setTimeout(() => {
+                typeWriter(contact, email);
+            }, 1000);
+        });
+    </script>
 </body>
 </html>
