@@ -21,6 +21,9 @@
             text-align: center;
             white-space: pre-wrap;
             margin-bottom: 20vh;
+            font-size: 2.5rem;
+            max-width: 80%;
+            line-height: 1.4;
         }
         .cursor {
             animation: blink 0.7s infinite;
@@ -31,19 +34,26 @@
             100% { opacity: 0; }
         }
         #contact {
-            font-size: 0.9em;
+            font-size: 1.5rem;
             margin-top: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            text-decoration: underline;
+        }
+        @keyframes lightPass {
+            0% { color: #0f0; text-decoration-color: #0f0; }
+            50% { color: #fff; text-decoration-color: #fff; }
+            100% { color: #fff; text-decoration-color: #fff; }
         }
     </style>
 </head>
 <body>
     <div id="terminal"></div>
-    <div id="contact"></div>
+    <div id="contact">hello@oyarsa.health</div>
     <script>
         const terminal = document.getElementById('terminal');
         const contact = document.getElementById('contact');
         const text = `AI-enriched quality cancer care for everyone, everywhere.`;
-        const email = `hello@oyarsa.health`;
 
         let i = 0;
         function typeWriter(element, content, callback) {
@@ -60,8 +70,11 @@
         typeWriter(terminal, text, () => {
             terminal.innerHTML += '<span class="cursor">█</span>';
             setTimeout(() => {
-                typeWriter(contact, email);
-            }, 1000);
+                contact.style.opacity = '1';
+                setTimeout(() => {
+                    contact.style.animation = 'lightPass 1.5s forwards';
+                }, 500);
+            }, 500);
         });
     </script>
 </body>
